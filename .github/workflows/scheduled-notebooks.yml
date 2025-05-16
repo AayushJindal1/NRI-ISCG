@@ -20,9 +20,14 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install nbconvert
-        run: pip install --quiet nbconvert
+      # ── 3.2 Install Jupyter/nbconvert + register python3 kernel ──────────
+      - name: Install nbconvert & ipykernel
+        run: |
+          pip install --quiet nbconvert ipykernel
+          # Register a kernel called "python3" so nbconvert --execute can find it
+          python -m ipykernel install --user --name python3 --display-name "Python 3"
 
+      # ── 3.3 Run the runner script ────────────────────────────────────────
       - name: Execute notebooks
         run: python run_all.py
 
