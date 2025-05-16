@@ -4,6 +4,8 @@ on:
   schedule:
     # runs every hour – change this cron as you like
     - cron: '0 * * * *'
+    # add this so you can trigger it by button
+  workflow_dispatch:
 
 jobs:
   run-notebooks:
