@@ -1,3 +1,7 @@
+# ─── Grant write access to contents so the GITHUB_TOKEN can push ─────────
+permissions:
+  contents: write
+
 name: Scheduled Notebook Runner
 
 on:
@@ -14,6 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          # make sure the GITHUB_TOKEN we’re about to grant is actually used
+          persist-credentials: true
+          fetch-depth: 0        # optional, but ensures full history if you need it
+
 
       - name: Set up Python
         uses: actions/setup-python@v4
